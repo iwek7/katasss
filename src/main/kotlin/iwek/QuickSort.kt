@@ -4,33 +4,30 @@ fun quickSort(arr: IntArray) {
     quickSort(arr, 0, arr.size - 1)
 }
 
-/**
- * Below code assumes that end is index of last position of array (not one beyond)
- */
-
 fun quickSort(arr: IntArray, start: Int, end: Int) {
     if (start < end) {
-        val pivot = partition(arr, start, end)
-        quickSort(arr, start, pivot - 1)
-        quickSort(arr, pivot + 1, end)
+        val p = partition(arr, start, end)
+        quickSort(arr, 0, p - 1)
+        quickSort(arr, p + 1, end)
     }
 }
 
 fun partition(arr: IntArray, start: Int, end: Int): Int {
     val pivot = arr[end]
-    var p = start - 1
+    var pivotSeparator = start - 1
+
     for (j in start until end) {
         if (arr[j] <= pivot) {
-            p++
-            arr.swap(p, j)
+            pivotSeparator++
+            arr[j] = arr[pivotSeparator].also { arr[pivotSeparator] = arr[j] }
         }
     }
-    arr.swap(p + 1, end)
-    return p + 1
+    arr[end] = arr[++pivotSeparator].also {arr[pivotSeparator] = arr[end]}
+    return pivotSeparator
 }
 
-fun IntArray.swap(x: Int, y: Int) {
-    val tmp = this[x]
-    this[x] = this[y]
-    this[y] = tmp
+fun IntArray.swap(p1 : Int, p2 : Int) {
+    val tmp = this[p1]
+    this[p1] = this[p2]
+    this[p2] = tmp
 }

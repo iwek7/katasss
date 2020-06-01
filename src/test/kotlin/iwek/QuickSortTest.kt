@@ -24,8 +24,13 @@ class QuickSortTest {
     }
 
     @Test
-    fun singleElement() {
+    fun repeatedElement() {
         testSort(intArrayOf(2, 2, 2, 2, 2))
+    }
+
+    @Test
+    fun singleElement() {
+        testSort(intArrayOf(67))
     }
 
     private fun testSort(arr: IntArray) {
